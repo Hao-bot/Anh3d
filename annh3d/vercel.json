@@ -1,51 +1,19 @@
 {
   "version": 2,
-  "routes": [
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "headers": [
     {
-      "src": "/Build/(.*)",
-      "headers": {
-        "Content-Type": "application/wasm",
-        "Content-Encoding": "br"
-      },
-      "continue": true
-    },
-    {
-      "src": "/TemplateData/(.*)",
-      "headers": {
-        "Cache-Control": "s-maxage=31536000, immutable"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(.*).js",
-      "headers": {
-        "Content-Type": "application/javascript",
-        "Cache-Control": "s-maxage=31536000, immutable"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(.*).data",
-      "headers": {
-        "Content-Type": "application/octet-stream",
-        "Cache-Control": "s-maxage=31536000, immutable"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(.*).wasm",
-      "headers": {
-        "Content-Type": "application/wasm",
-        "Cache-Control": "s-maxage=31536000, immutable"
-      },
-      "continue": true
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/Build/(.*)",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/octet-stream"
+        },
+        {
+          "key": "Content-Encoding",
+          "value": "br"
+        }
+      ]
     }
   ]
 }
