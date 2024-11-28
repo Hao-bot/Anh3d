@@ -4,12 +4,48 @@
     {
       "src": "/Build/(.*)",
       "headers": {
-        "Content-Encoding": "br",
-        "Content-Type": "application/wasm"
+        "Content-Type": "application/wasm",
+        "Content-Encoding": "br"
       },
       "continue": true
     },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/" }
+    {
+      "src": "/TemplateData/(.*)",
+      "headers": {
+        "Cache-Control": "s-maxage=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/(.*).js",
+      "headers": {
+        "Content-Type": "application/javascript",
+        "Cache-Control": "s-maxage=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/(.*).data",
+      "headers": {
+        "Content-Type": "application/octet-stream",
+        "Cache-Control": "s-maxage=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/(.*).wasm",
+      "headers": {
+        "Content-Type": "application/wasm",
+        "Cache-Control": "s-maxage=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
